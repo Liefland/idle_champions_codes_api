@@ -1,32 +1,49 @@
-# TODOPROJNAME
+# Idle Champion Codes
 
-[![Build Status](https://github.com/zarthus/TODOPROJNAME/actions/workflows/rust.yml/badge.svg)](https://github.com/zarthus/TODOPROJNAME/actions)
-[![Docs.rs](https://docs.rs/TODOPROJNAME/badge.svg)](https://docs.rs/TODOPROJNAME/latest/)
+[![Build Status](https://github.com/zarthus/idle_champions_codes/actions/workflows/rust.yml/badge.svg)](https://github.com/zarthus/idle_champions_codes/actions)
+[![Docs.rs](https://docs.rs/idle_champions_codes/badge.svg)](https://docs.rs/idle_champions_codes/latest/)
 [![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](README#license)
 
-TODO
+Web API to list Idle Champions of the Forgotten Realms codes.
 
-## Installation
+## Running it
 
-Add as a dependency: 
-- `cargo add TODOPROJNAME`
+`cargo run` should work, we use Rocket under the hood so you can use [Rocket.toml](https://rocket.rs/) configuration.
 
-Install as software:
-- `cargo install TODOPROJNAME`
+Example: Consuming the API with curl and jq:
 
-## Examples
-
-```rust
-fn main() { // TODO
-    println!("Hello, world!");
-}
+```bash
+curl -s http://localhost:8000/v1/codes | jq '.codes | .[] | select(.expired == false).code'
 ```
 
-For more examples, see the [examples](examples) directory.
+Example: Adding a new code:
+
+```bash
+curl -s -X PUT http://localhost:8000/v1/codes \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'X-Api-Key: API_KEY' \
+  --data-binary @- << EOF
+  {"code": "HELL-OWOR-LD!!", 
+  "expires_at": 1806038430, 
+  "creator_name": "Foo!", 
+  "creator_url": "https://foo.creator.bar",
+  "submitter_name": "Bar!",
+  "submitter_url": "https://bar.submitter.bar"} 
+EOF
+```
 
 ## Contributing
 
 Contributions are welcome! Feel free to open an issue or submit a pull request.
+
+To set up, we recommend the following:
+
+- Familiarity with sqlx, rocket and postgresql are helpful.
+- You will need a postgres service running, and that has the DB with migrations loaded: `db/migrations/*`
+  - Optionally, import the seeds too: `db/dev_seeds.sql`
+- Create an env file at `.env` using the template file (`.env.template`),
+- You might want to add a `Rocket.toml`
 
 ## License
 
