@@ -1,0 +1,28 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\nwith\n    creator_insert as (\n        insert into sources (name, url)\n            values ($1, $2)\n            on conflict (name, url) do nothing\n        returning id\n    ),\n    creator_select as (\n        select id from sources where name = $1 order by id desc limit 1\n    ),\n    submitter_insert as (\n        insert into sources (name, url)\n            values ($3, $4)\n            on conflict (name, url) do nothing\n        returning id\n    ),\n    submitter_select as (\n        select id from sources where name = $3 order by id desc limit 1\n    )\ninsert into codes (code, expires_at, creator_id, submitter_id, lister_id)\n    values (\n        $7, \n        $5,\n        coalesce(\n            (select id from creator_insert),\n            (select id from creator_select)\n        ),\n        coalesce(\n            (select id from submitter_insert),\n            (select id from submitter_select)\n        ),\n        $6\n    )\n    on conflict (id) do nothing\nreturning id;\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int4"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Varchar",
+        "Varchar",
+        "Varchar",
+        "Varchar",
+        "Timestamp",
+        "Int4",
+        "Varchar"
+      ]
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "9b56f2d6904a06ec4294b5262870e9f6a03da314f0aa86a33d0f741e3a269db0"
+}
