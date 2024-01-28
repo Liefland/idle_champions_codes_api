@@ -91,17 +91,11 @@ with
             on conflict (name, url) do nothing
         returning id
     ),
-    creator_select as (
-        select id from sources where name = $1 order by id desc limit 1
-    ),
     submitter_insert as (
         insert into sources (name, url)
             values ($3, $4)
             on conflict (name, url) do nothing
         returning id
-    ),
-    submitter_select as (
-        select id from sources where name = $3 order by id desc limit 1
     )
 insert into codes (code, expires_at, creator_id, submitter_id, lister_id)
     values (
@@ -109,11 +103,11 @@ insert into codes (code, expires_at, creator_id, submitter_id, lister_id)
         $5,
         coalesce(
             (select id from creator_insert),
-            (select id from creator_select)
+            (select id from sources where name = $1)
         ),
         coalesce(
             (select id from submitter_insert),
-            (select id from submitter_select)
+            (select id from sources where name = $3)
         ),
         $6
     )

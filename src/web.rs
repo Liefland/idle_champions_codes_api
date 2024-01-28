@@ -17,9 +17,9 @@ pub struct CodeResponse {
 
 #[derive(serde::Serialize)]
 pub struct SourceInformation {
-    pub lister: i32,
+    pub creator: i32,
     pub submitter: i32,
-    pub source: i32,
+    pub lister: i32,
 }
 
 #[derive(serde::Serialize)]
@@ -94,7 +94,7 @@ impl ListCodesResponse {
                     sources: SourceInformation {
                         lister: code.lister.id.unwrap(),
                         submitter: code.submitter.id.unwrap(),
-                        source: code.creator.id.unwrap(),
+                        creator: code.creator.id.unwrap(),
                     },
                 }
             })
