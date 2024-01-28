@@ -5,17 +5,15 @@
 
 Web API to list Idle Champions of the Forgotten Realms codes.
 
-## Running it
+## Using it
 
-`cargo run` should work, we use Rocket under the hood so you can use [Rocket.toml](https://rocket.rs/) configuration.
-
-Example: Consuming the API with curl and jq:
+#### Example: Consuming the API with curl and jq:
 
 ```bash
 curl -s http://localhost:8000/v1/codes | jq '.codes | .[] | select(.expired == false).code'
 ```
 
-Example: Adding a new code:
+#### Example: Adding a new code
 
 ```bash
 curl -s -X PUT http://localhost:8000/v1/codes \
