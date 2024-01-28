@@ -7,8 +7,8 @@ license = "MIT OR Apache-2.0"
 authors = [
     "Zarthus <zarthus@liefland.net>",
 ]
-repository = "https://github.com/zarthus/idle_champions_codes"
-homepage = "https://github.com/zarthus/idle_champions_codes"
+repository = "https://github.com/Liefland/idle_champions_codes_api"
+homepage = "https://codes.idlechampions.liefland.net/"
 categories = []
 keywords = []
 readme = "README.md"
@@ -33,4 +33,5 @@ default = [
 ]
 debug_errors = [] # Include raw error messages in JSON responses, useful for dev, not recommended for prod.
 migrate = ["sqlx/migrate"]
+
 [badges]

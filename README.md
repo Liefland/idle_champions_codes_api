@@ -1,7 +1,6 @@
 # Idle Champion Codes
 
-[![Build Status](https://github.com/zarthus/idle_champions_codes/actions/workflows/rust.yml/badge.svg)](https://github.com/zarthus/idle_champions_codes/actions)
-[![Docs.rs](https://docs.rs/idle_champions_codes/badge.svg)](https://docs.rs/idle_champions_codes/latest/)
+[![Build Status](https://github.com/Liefland/idle_champions_codes_api/actions/workflows/rust.yml/badge.svg)](https://github.com/Liefland/idle_champions_codes_api/actions)
 [![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](README#license)
 
 Web API to list Idle Champions of the Forgotten Realms codes.

@@ -62,7 +62,7 @@ pub async fn index() -> Json<IndexResponse> {
         message: "Welcome to a simple API for listing Idle Champions Codes!
 This tool is meant to be used with my other idle champions tooling.
 You will probably want to visit `/v1/codes`",
-        source_url: "https://github.com/Zarthus/idle_champions_codes",
+        source_url: "https://github.com/Liefland/idle_champions_codes_api",
         routes,
     })
 }
