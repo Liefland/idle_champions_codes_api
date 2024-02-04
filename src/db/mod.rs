@@ -1,4 +1,4 @@
-use rocket::time::PrimitiveDateTime;
+use time::Date;
 
 mod api_key;
 mod code;
@@ -26,7 +26,7 @@ pub struct ApiKey {
 pub struct Code {
     pub id: Option<i32>,
     pub code: String,
-    pub expires_at: PrimitiveDateTime,
+    pub expires_at: Date,
     pub submitter_id: i32,
     pub creator_id: i32,
     pub lister_id: i32,

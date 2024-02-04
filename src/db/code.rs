@@ -10,7 +10,7 @@ macro_rules! map_row {
             code: Code {
                 id: Some($row.code_id),
                 code: $row.code.clone(),
-                expires_at: $row.expires_at,
+                expires_at: $row.expires_at.unwrap_or($row.real_expires_at.date()),
                 submitter_id: $row.submitter_id,
                 creator_id: $row.creator_id,
                 lister_id: $row.lister_id,
@@ -39,10 +39,11 @@ pub async fn find_codes(
     allow_expired: bool,
 ) -> Result<Vec<FullCode>, sqlx::Error> {
     sqlx::query!(
-        "select
+        "select distinct on (code, expires_at)
             c.id as code_id,
-            c.code,
-            c.expires_at,
+            c.code as code,
+            date(c.expires_at + interval '1 day') as expires_at,
+            c.expires_at as real_expires_at,
             creator.id as creator_id,
             creator.name as creator_name,
             creator.url as creator_url,
@@ -56,8 +57,8 @@ pub async fn find_codes(
         join sources creator on creator.id = c.creator_id
         join sources submitter on submitter.id = c.submitter_id
         join sources lister on lister.id = c.lister_id
-        where (c.expires_at > now() or $1 = true)
-        order by c.expires_at desc
+        where (expires_at > now() or $1 = true)
+        order by expires_at desc
         limit 100",
         allow_expired,
     )

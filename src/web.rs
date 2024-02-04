@@ -78,7 +78,7 @@ impl ListCodesResponse {
         let mut sources = HashMap::new();
 
         let now_odt = time::OffsetDateTime::now_utc();
-        let now_pdt = time::PrimitiveDateTime::new(now_odt.date(), now_odt.time());
+        let now_date = now_odt.date();
 
         let codes = codes
             .into_iter()
@@ -90,7 +90,7 @@ impl ListCodesResponse {
                 CodeResponse {
                     code: code.code.code,
                     expires_at: code.code.expires_at.to_string(),
-                    expired: code.code.expires_at < now_pdt,
+                    expired: code.code.expires_at < now_date,
                     sources: SourceInformation {
                         lister: code.lister.id.unwrap(),
                         submitter: code.submitter.id.unwrap(),
