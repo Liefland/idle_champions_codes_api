@@ -125,7 +125,7 @@ returning id;
             .unwrap_or_else(|| partial_code.creator_url),
         pdt,
         lister_source_id,
-        partial_code.code,
+        partial_code.code.to_uppercase(),
     )
     .fetch_one(conn)
     .await
