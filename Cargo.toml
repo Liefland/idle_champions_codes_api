@@ -19,7 +19,7 @@ rocket = { version = "0.5.0", features = ["json"] }
 serde = "1.0.197"
 anyhow = "1.0.80"
 rocket_db_pools = {  version = "0.1.0", features = ["sqlx_postgres", "sqlx_macros"] }
-time = "0.3.31"
+time = "0.3.36"
 
 # Ensure it is the same: https://github.com/rwf2/Rocket/blob/master/contrib/db_pools/lib/Cargo.toml#L80
 [dependencies.sqlx]
