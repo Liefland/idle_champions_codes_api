@@ -17,7 +17,7 @@ publish = false
 [dependencies]
 rocket = { version = "0.5.0", features = ["json"] }
 serde = "1.0.197"
-anyhow = "1.0.80"
+anyhow = "1.0.86"
 rocket_db_pools = {  version = "0.1.0", features = ["sqlx_postgres", "sqlx_macros"] }
 time = "0.3.31"
 
